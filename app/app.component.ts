@@ -2,7 +2,13 @@ import {Component} from '@angular/core';
 
 @Component({
     selector: 'my-app',
-    template: '<h1>Skeleton project</h1>'
+    template: `
+        <div class="container">
+            <div class="col-cs-3">
+                <weather-widget></weather-widget>
+            </div>
+        </div>
+    `
 })
 
 export class AppComponent {}
