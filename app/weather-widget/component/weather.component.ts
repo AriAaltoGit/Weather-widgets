@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {WeatherService} from '../service/weather.service';
+import { WeatherService } from '../service/weather.service';
 
 @Component({
     moduleId: module.id,
@@ -10,8 +10,11 @@ import {WeatherService} from '../service/weather.service';
     providers: [WeatherService]
 })
 export class WeatherComponent {
-    constructor(private service: WeatherService){
+    constructor(private service: WeatherService) {
         this.service.getCurrentLocation();
+        this.service.getCurrentWeather(0, 0)
+            .subscribe(weather => console.log(weather),
+                err => console.error(err));
     }
 }
 
