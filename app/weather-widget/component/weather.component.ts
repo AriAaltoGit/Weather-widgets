@@ -14,6 +14,8 @@ import { Weather } from '../model/weather';
 export class WeatherComponent implements OnInit {
     pos: Position;
     weatherData = new Weather(null, null, null, null, null);  //Initialize before data
+    currentSpeedUnit = "m/s";
+    currentTempUnit = "celsius";
 
     constructor(private service: WeatherService) { }
 
@@ -39,6 +41,7 @@ export class WeatherComponent implements OnInit {
                 this.weatherData.humidity = weather["currently"]["humidity"],
                 this.weatherData.icon = weather["currently"]["icon"]  
                 console.log("Weather: ", this.weatherData); // TESTING
+                console.log("Weather: ", weather); 
             },
                 err => console.error(err));
     }

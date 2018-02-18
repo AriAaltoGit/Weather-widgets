@@ -16,6 +16,8 @@ var WeatherComponent = /** @class */ (function () {
     function WeatherComponent(service) {
         this.service = service;
         this.weatherData = new weather_1.Weather(null, null, null, null, null); //Initialize before data
+        this.currentSpeedUnit = "m/s";
+        this.currentTempUnit = "celsius";
     }
     WeatherComponent.prototype.ngOnInit = function () {
         this.getCurrentLocation();
@@ -38,6 +40,7 @@ var WeatherComponent = /** @class */ (function () {
                 _this.weatherData.humidity = weather["currently"]["humidity"],
                 _this.weatherData.icon = weather["currently"]["icon"];
             console.log("Weather: ", _this.weatherData); // TESTING
+            console.log("Weather: ", weather);
         }, function (err) { return console.error(err); });
     };
     WeatherComponent = __decorate([
