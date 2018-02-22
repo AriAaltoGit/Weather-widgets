@@ -2,7 +2,8 @@
     <div class="row">
         <div class="col-xs-8">
             <div class="card" (click)="toggleUnits()" [ngStyle]="setStyles()">
-                <div class="card-header">
+                <!-- class.invisible keepsd DOM structure -->
+                <div class="card-header" [class.invisible]="!dataReceived">
                     <p>{{ currentLocation }}</p>
                 </div>
                 <div class="col-xs-4 text-xs-right">
@@ -14,7 +15,11 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="card-block">
-                            <canvas id="icon" ></canvas>
+                            <div id="indicator" [hidden]="dataReceived">
+                                <i class="fa fa-circle-o-notch fa-spin fa-4x fa-fw"></i>
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <canvas id="icon" [hidden]="!dataReceived"></canvas>
                             <p>{{ weatherData.summary }}</p>
                         </div>
                     </div>
@@ -27,7 +32,7 @@
                         </div>
                     </div>
                     <div class="col-xs-5 offset-xs-2">
-                        <div class="card-footer">
+                        <div class="card-footer" [class.invisible]="!dataReceived">
                             <p>Humidity</p>
                             <p>{{ weatherData.humidity | percent}}</p>
                         </div>
