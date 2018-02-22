@@ -19,6 +19,7 @@ var WeatherComponent = /** @class */ (function () {
         this.currentSpeedUnit = "m/s";
         this.currentTempUnit = "celsius";
         this.currentLocation = "";
+        this.icons = new Skycons({ "color": "#FFF" });
     }
     WeatherComponent.prototype.ngOnInit = function () {
         this.getCurrentLocation();
@@ -43,6 +44,7 @@ var WeatherComponent = /** @class */ (function () {
                 _this.weatherData.icon = weather["currently"]["icon"];
             console.log("Weather: ", _this.weatherData); // TESTING
             console.log("Weather: ", weather);
+            _this.setIcon();
         }, function (err) { return console.error(err); });
     };
     WeatherComponent.prototype.getLocationName = function () {
@@ -54,6 +56,33 @@ var WeatherComponent = /** @class */ (function () {
             console.log("Name: ", _this.currentLocation);
         });
     };
+    WeatherComponent.prototype.toggleUnits = function () {
+        this.toggleTempUnits();
+        this.toggleSpeedUnits();
+    };
+    WeatherComponent.prototype.toggleTempUnits = function () {
+        if (this.currentTempUnit == "fahrenheit") {
+            this.currentTempUnit = "celsius";
+        }
+        else {
+            this.currentTempUnit = "fahrenheit";
+        }
+        ;
+    };
+    WeatherComponent.prototype.toggleSpeedUnits = function () {
+        if (this.currentSpeedUnit == "m/s") {
+            this.currentSpeedUnit = "mph";
+        }
+        else {
+            this.currentSpeedUnit = "m/s";
+        }
+        ;
+    };
+    WeatherComponent.prototype.setIcon = function () {
+        this.icons.add("icon", this.weatherData.icon);
+        this.icons.play();
+    };
+    ;
     WeatherComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

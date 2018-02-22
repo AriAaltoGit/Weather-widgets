@@ -1,1 +1,1 @@
-# AngularSkeleton
+# Angular weather widget

@@ -4,6 +4,10 @@ import { WeatherService } from '../service/weather.service';
 
 import { Weather } from '../model/weather';
 
+import { WEATHER_COLORS} from '../constants/constants';
+//import 'skycons';
+declare var Skycons: any; // This removes editor error from undefined Skycons
+
 @Component({
     moduleId: module.id,
     selector: 'weather-widget',
@@ -17,6 +21,7 @@ export class WeatherComponent implements OnInit {
     currentSpeedUnit = "m/s";
     currentTempUnit = "celsius";
     currentLocation = "";
+    icons = new Skycons({"color": "#FFF"});
 
     constructor(private service: WeatherService) { }
 
@@ -44,6 +49,7 @@ export class WeatherComponent implements OnInit {
                 this.weatherData.icon = weather["currently"]["icon"]  
                 console.log("Weather: ", this.weatherData); // TESTING
                 console.log("Weather: ", weather); 
+                this.setIcon();
             },
                 err => console.error(err));
     }
@@ -57,6 +63,32 @@ export class WeatherComponent implements OnInit {
 
         });
     }
+
+    toggleUnits(){
+        this.toggleTempUnits();
+        this.toggleSpeedUnits();
+    }
+
+    toggleTempUnits(){
+        if(this.currentTempUnit == "fahrenheit") {
+            this.currentTempUnit = "celsius";
+        } else {
+            this.currentTempUnit = "fahrenheit";
+        };
+    }
+
+    toggleSpeedUnits(){
+        if(this.currentSpeedUnit == "m/s") {
+            this.currentSpeedUnit = "mph";
+        } else {
+            this.currentSpeedUnit = "m/s";
+        };
+    }
+
+    setIcon() {
+        this.icons.add("icon", this.weatherData.icon);
+        this.icons.play();
+    };
 }
 
 /*Angular is running in the development mode. Call enableProdMode() to enable the production mode.

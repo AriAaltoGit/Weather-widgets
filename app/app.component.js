@@ -13,8 +13,8 @@ var AppComponent = /** @class */ (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n        <div class=\"container\">\n            <div class=\"col-cs-4\">\n                <weather-widget></weather-widget>\n            </div>\n        </div>\n    ",
-            styles: ["\n    .container {\n        padding-top: 5rem;\n    }\n    "]
+            template: "\n       \n                <weather-widget></weather-widget>\n    ",
+            styles: ["\n    \n    \n    "]
         })
     ], AppComponent);
     return AppComponent;

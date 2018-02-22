@@ -1,24 +1,39 @@
-<div class="card">
-    <div class="card-header">
+<div class="container">
+    <div class="row">
         <div class="col-xs-8">
-            <p>{{ currentLocation }}</p>
-        </div>
-        <div class="col-xs-4 text-xs-right">
-            <h1>{{ weatherData.temp | tempUnit: currentTempUnit | number: '.0-0'}}&deg;</h1>
-        </div>
-    </div>
-    <div class="card-block">
-        <h1>0</h1>
-        <p>{{ weatherData.summary }}</p>
-    </div>
-    <div class="card-footer">
-        <div class="col-xs-5">
-            <p>Wind</p>
-            <p>{{ weatherData.wind | speedUnit: currentSpeedUnit }}</p>
-        </div>
-        <div class="col-xs-5 offset-xs-2">
-            <p>Humidity</p>
-            <p>{{ weatherData.humidity | percent}}</p>
+            <div class="card" (click)="toggleUnits()">
+                <div class="card-header">
+                    <p>{{ currentLocation }}</p>
+                </div>
+                <div class="col-xs-4 text-xs-right">
+                    <div class="card-header">
+                        <h1>{{ weatherData.temp | tempUnit: currentTempUnit | number: '.0-0'}}&deg;</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card-block">
+                            <canvas id="icon" ></canvas>
+                            <p>{{ weatherData.summary }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <div class="card-footer">
+                            <p>Wind</p>
+                            <p>{{ weatherData.wind | speedUnit: currentSpeedUnit }}</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-5 offset-xs-2">
+                        <div class="card-footer">
+                            <p>Humidity</p>
+                            <p>{{ weatherData.humidity | percent}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
