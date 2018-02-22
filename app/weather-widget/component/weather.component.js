@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var weather_service_1 = require("../service/weather.service");
 var weather_1 = require("../model/weather");
+var constants_1 = require("../constants/constants");
 var WeatherComponent = /** @class */ (function () {
     function WeatherComponent(service) {
         this.service = service;
@@ -19,7 +20,7 @@ var WeatherComponent = /** @class */ (function () {
         this.currentSpeedUnit = "m/s";
         this.currentTempUnit = "celsius";
         this.currentLocation = "";
-        this.icons = new Skycons({ "color": "#FFF" });
+        this.icons = new Skycons();
     }
     WeatherComponent.prototype.ngOnInit = function () {
         this.getCurrentLocation();
@@ -83,6 +84,17 @@ var WeatherComponent = /** @class */ (function () {
         this.icons.play();
     };
     ;
+    WeatherComponent.prototype.setStyles = function () {
+        /* Check first if icon is set. This is binded instead of subscribed.*/
+        if (this.weatherData.icon) {
+            this.icons.color = constants_1.WEATHER_COLORS[this.weatherData.icon]["color"];
+            return constants_1.WEATHER_COLORS[this.weatherData.icon];
+        }
+        else {
+            this.icons.color = constants_1.WEATHER_COLORS["default"]["color"];
+            return constants_1.WEATHER_COLORS["default"];
+        }
+    };
     WeatherComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

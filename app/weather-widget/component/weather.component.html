@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-8">
-            <div class="card" (click)="toggleUnits()">
+            <div class="card" (click)="toggleUnits()" [ngStyle]="setStyles()">
                 <div class="card-header">
                     <p>{{ currentLocation }}</p>
                 </div>
