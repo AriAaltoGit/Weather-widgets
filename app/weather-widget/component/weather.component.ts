@@ -5,8 +5,7 @@ import { WeatherService } from '../service/weather.service';
 import { Weather } from '../model/weather';
 
 import { WEATHER_COLORS } from '../constants/constants';
-//import 'skycons';
-declare var Skycons: any; // This removes editor error from undefined Skycons
+declare var Skycons: any; // This removes editor error from undefined Skycons. Skycons is imported in index.html.
 
 @Component({
     moduleId: module.id,
@@ -23,6 +22,7 @@ export class WeatherComponent implements OnInit {
     currentLocation = "";
     icons = new Skycons();
     dataReceived = false;
+    currentTime = Date();
 
     constructor(private service: WeatherService) { }
 
@@ -48,8 +48,10 @@ export class WeatherComponent implements OnInit {
                     this.weatherData.wind = weather["currently"]["windSpeed"],
                     this.weatherData.humidity = weather["currently"]["humidity"],
                     this.weatherData.icon = weather["currently"]["icon"]
-                console.log("Weather: ", this.weatherData); // TESTING
-                console.log("Weather: ", weather);
+                    
+                    this.currentTime = new Date().toTimeString().slice(0,5); 
+                //console.log("Weather: ", this.weatherData); // TESTING
+                //console.log("Weather: ", weather); // TESTING
                 this.setIcon();
                 this.dataReceived = true;
             },

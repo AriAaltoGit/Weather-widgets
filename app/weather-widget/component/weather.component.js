@@ -22,6 +22,7 @@ var WeatherComponent = /** @class */ (function () {
         this.currentLocation = "";
         this.icons = new Skycons();
         this.dataReceived = false;
+        this.currentTime = Date();
     }
     WeatherComponent.prototype.ngOnInit = function () {
         this.getCurrentLocation();
@@ -44,8 +45,9 @@ var WeatherComponent = /** @class */ (function () {
                 _this.weatherData.wind = weather["currently"]["windSpeed"],
                 _this.weatherData.humidity = weather["currently"]["humidity"],
                 _this.weatherData.icon = weather["currently"]["icon"];
-            console.log("Weather: ", _this.weatherData); // TESTING
-            console.log("Weather: ", weather);
+            _this.currentTime = new Date().toTimeString().slice(0, 5);
+            //console.log("Weather: ", this.weatherData); // TESTING
+            //console.log("Weather: ", weather); // TESTING
             _this.setIcon();
             _this.dataReceived = true;
         }, function (err) { return console.error(err); });

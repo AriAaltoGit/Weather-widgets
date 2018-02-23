@@ -6,7 +6,7 @@ exports.GOOGLE_KEY = "AIzaSyDCAOzZNUybvO9b2zRZP1uWqVX6LyWjGIU";
 exports.GOOGLE_ROOT = "https://maps.googleapis.com/maps/api/geocode/json";
 exports.WEATHER_COLORS = {
     'default': {
-        'background-color': '#00BCD4',
+        'background-color': '#6AC3FF',
         'color': '#FFF'
     },
     'clear-day': {
@@ -38,7 +38,7 @@ exports.WEATHER_COLORS = {
         'color': '#FFF'
     },
     'cloudy': {
-        'background-color': '#00BCD4',
+        'background-color': '#778496',
         'color': '#000'
     },
     'partly-cloudy-day': {
@@ -47,7 +47,7 @@ exports.WEATHER_COLORS = {
     },
     'partly-cloudy-night': {
         'background-color': '#34495E',
-        'color': '#000'
-    },
+        'color': '#FFF'
+    }
 };
 //# sourceMappingURL=constants.js.map
