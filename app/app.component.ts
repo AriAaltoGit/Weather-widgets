@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
     selector: 'my-app',
     template: `
         <div class="container">
-            <div class="col-sm-6">
+            <div class="col-sm-6 widget-column">
                 <weather-widget></weather-widget>
             </div>
         </div>

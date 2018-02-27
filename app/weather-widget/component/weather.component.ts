@@ -5,6 +5,8 @@ import { WeatherService } from '../service/weather.service';
 import { Weather } from '../model/weather';
 
 import { WEATHER_COLORS } from '../constants/constants';
+
+import {Observable} from 'rxjs/Rx';
 declare var Skycons: any; // This removes editor error from undefined Skycons. Skycons is imported in index.html.
 
 @Component({
@@ -27,7 +29,13 @@ export class WeatherComponent implements OnInit {
     constructor(private service: WeatherService) { }
 
     ngOnInit() {
-        this.getCurrentLocation();
+       // this.getCurrentLocation();
+       
+       /* Disable timer to test in ie browser. */
+        let timer = Observable.timer(2000,60000);
+        timer.subscribe(t=> {
+            this.getCurrentLocation();
+        });
     }
 
     getCurrentLocation() {
@@ -44,12 +52,12 @@ export class WeatherComponent implements OnInit {
         this.service.getCurrentWeather(this.pos.coords.latitude, this.pos.coords.longitude)
             .subscribe(weather => {
                 this.weatherData.temp = weather["currently"]["temperature"],
-                    this.weatherData.summary = weather["currently"]["summary"],
-                    this.weatherData.wind = weather["currently"]["windSpeed"],
-                    this.weatherData.humidity = weather["currently"]["humidity"],
-                    this.weatherData.icon = weather["currently"]["icon"]
+                this.weatherData.summary = weather["currently"]["summary"],
+                this.weatherData.wind = weather["currently"]["windSpeed"],
+                this.weatherData.humidity = weather["currently"]["humidity"],
+                this.weatherData.icon = weather["currently"]["icon"]
                     
-                    this.currentTime = new Date().toTimeString().slice(0,5); 
+                this.currentTime = new Date().toTimeString().slice(0,5); 
                 //console.log("Weather: ", this.weatherData); // Test 
                 //console.log("Weather: ", weather); // Test
                 this.setIcon();

@@ -13,6 +13,7 @@ var core_1 = require("@angular/core");
 var weather_service_1 = require("../service/weather.service");
 var weather_1 = require("../model/weather");
 var constants_1 = require("../constants/constants");
+var Rx_1 = require("rxjs/Rx");
 var WeatherComponent = /** @class */ (function () {
     function WeatherComponent(service) {
         this.service = service;
@@ -25,7 +26,13 @@ var WeatherComponent = /** @class */ (function () {
         this.currentTime = Date();
     }
     WeatherComponent.prototype.ngOnInit = function () {
-        this.getCurrentLocation();
+        // this.getCurrentLocation();
+        var _this = this;
+        /* Disable timer to test in ie browser. */
+        var timer = Rx_1.Observable.timer(2000, 60000);
+        timer.subscribe(function (t) {
+            _this.getCurrentLocation();
+        });
     };
     WeatherComponent.prototype.getCurrentLocation = function () {
         var _this = this;
@@ -38,7 +45,7 @@ var WeatherComponent = /** @class */ (function () {
     };
     WeatherComponent.prototype.getCurrentWeather = function () {
         var _this = this;
-        this.service.getCurrentWeather(this.pos.coords.latitude, this.pos.coords.latitude)
+        this.service.getCurrentWeather(this.pos.coords.latitude, this.pos.coords.longitude)
             .subscribe(function (weather) {
             _this.weatherData.temp = weather["currently"]["temperature"],
                 _this.weatherData.summary = weather["currently"]["summary"],
@@ -46,8 +53,8 @@ var WeatherComponent = /** @class */ (function () {
                 _this.weatherData.humidity = weather["currently"]["humidity"],
                 _this.weatherData.icon = weather["currently"]["icon"];
             _this.currentTime = new Date().toTimeString().slice(0, 5);
-            //console.log("Weather: ", this.weatherData); // TESTING
-            //console.log("Weather: ", weather); // TESTING
+            //console.log("Weather: ", this.weatherData); // Test 
+            //console.log("Weather: ", weather); // Test
             _this.setIcon();
             _this.dataReceived = true;
         }, function (err) { return console.error(err); });
@@ -56,9 +63,8 @@ var WeatherComponent = /** @class */ (function () {
         var _this = this;
         this.service.getLocationName(this.pos.coords.latitude, this.pos.coords.longitude)
             .subscribe(function (location) {
-            console.log(location); //Test
+            //console.log(location); //Test location data
             _this.currentLocation = location["results"][1]["formatted_address"];
-            console.log("Name: ", _this.currentLocation);
         });
     };
     WeatherComponent.prototype.toggleUnits = function () {

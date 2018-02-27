@@ -43,7 +43,7 @@ exports.WEATHER_COLORS = {
     },
     'partly-cloudy-day': {
         'background-color': '#D2D7D3',
-        'color': '#FFF'
+        'color': '#000'
     },
     'partly-cloudy-night': {
         'background-color': '#34495E',
