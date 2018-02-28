@@ -22,3 +22,4 @@ Todo:
     Add Angular test and CircleCI integration.
     Optimizing code for distribution.
     Better support to browser and screen sizes.
+    Backend to store weather data.
