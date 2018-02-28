@@ -2,13 +2,13 @@
     "name": "angular2-skeleton",
     "version": "0.0.1",
     "description": "Skeleton project",
-    "//": {
+    "scripts": {
         "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
         "lite": "lite-server",
         "tsc": "tsc",
         "tsc:w": "tsc -w"
     },
-    "scripts": {
+    "//": {
         "start": "node server.js"
     },
     "license": "UNLICENSED",
