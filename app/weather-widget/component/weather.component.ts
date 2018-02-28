@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 import { WeatherService } from '../service/weather.service';
 
@@ -28,13 +28,20 @@ export class WeatherComponent implements OnInit {
     dataReceived = false;
     currentTime = Date();
 
-    @Input() target_lat: number;
-    @Input() target_long: number;
+    @Input() targetLat: number;
+    @Input() targetLong: number;
+    @Input() iconTarget: string;
+    @ViewChild('icon') canvas: ElementRef;
 
     constructor(private service: WeatherService) { }
 
+    ngAfterViewInit() {
+       /* Set weather icons to each card element*/
+        this.canvas.nativeElement.id = this.iconTarget;
+      }
+
     ngOnInit() {
-        if (this.target_long && this.target_long) {
+        if (this.targetLong && this.targetLong) {
             this.getCurrentWeatherFromInputCoords();
         }
         else {
@@ -60,8 +67,8 @@ export class WeatherComponent implements OnInit {
     }
 
     getCurrentWeatherFromInputCoords() {
-        this.posLat = this.target_lat;
-        this.posLong = this.target_long;
+        this.posLat = this.targetLat;
+        this.posLong = this.targetLong;
         this.getCurrentWeather();
         this.getLocationName();
     }
@@ -76,10 +83,11 @@ export class WeatherComponent implements OnInit {
                     this.weatherData.icon = weather["currently"]["icon"]
 
                 this.currentTime = new Date().toTimeString().slice(0, 5);
-                //console.log("Weather: ", this.weatherData); // Test 
-                //console.log("Weather: ", weather); // Test
                 this.setIcon();
                 this.dataReceived = true;
+
+                //console.log("Weather: ", this.weatherData); // Test 
+                //console.log("Weather: ", weather); // Test
             },
                 err => console.error(err));
     }
@@ -114,9 +122,10 @@ export class WeatherComponent implements OnInit {
     }
 
     setIcon() {
-        this.icons.add("icon", this.weatherData.icon);
+        //this.icons.add("icon", this.weatherData.icon);
+
+        this.icons.add(this.iconTarget, this.weatherData.icon);
         this.icons.play();
-        console.log("icons: ", this.icons);
     };
 
     setStyles(): Object {

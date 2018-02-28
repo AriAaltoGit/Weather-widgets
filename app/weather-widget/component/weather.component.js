@@ -28,9 +28,13 @@ var WeatherComponent = /** @class */ (function () {
         this.dataReceived = false;
         this.currentTime = Date();
     }
+    WeatherComponent.prototype.ngAfterViewInit = function () {
+        this.canvas.nativeElement.id = this.iconTarget;
+        console.log(this.canvas.nativeElement.id);
+    };
     WeatherComponent.prototype.ngOnInit = function () {
         var _this = this;
-        if (this.target_long && this.target_long) {
+        if (this.targetLong && this.targetLong) {
             this.getCurrentWeatherFromInputCoords();
         }
         else {
@@ -54,8 +58,8 @@ var WeatherComponent = /** @class */ (function () {
         }, function (err) { return console.error(err); });
     };
     WeatherComponent.prototype.getCurrentWeatherFromInputCoords = function () {
-        this.posLat = this.target_lat;
-        this.posLong = this.target_long;
+        this.posLat = this.targetLat;
+        this.posLong = this.targetLong;
         this.getCurrentWeather();
         this.getLocationName();
     };
@@ -69,10 +73,10 @@ var WeatherComponent = /** @class */ (function () {
                 _this.weatherData.humidity = weather["currently"]["humidity"],
                 _this.weatherData.icon = weather["currently"]["icon"];
             _this.currentTime = new Date().toTimeString().slice(0, 5);
-            //console.log("Weather: ", this.weatherData); // Test 
-            //console.log("Weather: ", weather); // Test
             _this.setIcon();
             _this.dataReceived = true;
+            //console.log("Weather: ", this.weatherData); // Test 
+            //console.log("Weather: ", weather); // Test
         }, function (err) { return console.error(err); });
     };
     WeatherComponent.prototype.getLocationName = function () {
@@ -106,9 +110,9 @@ var WeatherComponent = /** @class */ (function () {
         ;
     };
     WeatherComponent.prototype.setIcon = function () {
-        this.icons.add("icon", this.weatherData.icon);
+        //this.icons.add("icon", this.weatherData.icon);
+        this.icons.add(this.iconTarget, this.weatherData.icon);
         this.icons.play();
-        console.log("icons: ", this.icons);
     };
     ;
     WeatherComponent.prototype.setStyles = function () {
@@ -125,11 +129,19 @@ var WeatherComponent = /** @class */ (function () {
     __decorate([
         core_1.Input(),
         __metadata("design:type", Number)
-    ], WeatherComponent.prototype, "target_lat", void 0);
+    ], WeatherComponent.prototype, "targetLat", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Number)
-    ], WeatherComponent.prototype, "target_long", void 0);
+    ], WeatherComponent.prototype, "targetLong", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], WeatherComponent.prototype, "iconTarget", void 0);
+    __decorate([
+        core_1.ViewChild('icon'),
+        __metadata("design:type", core_1.ElementRef)
+    ], WeatherComponent.prototype, "canvas", void 0);
     WeatherComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
