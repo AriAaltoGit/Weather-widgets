@@ -15,3 +15,4 @@ lite-server for development. This is configured from package.json.
 The widget is set to production mode in main.ts for Heroku, but the code is not
 packed into distribution format. 
 
+https://glacial-reef-59256.herokuapp.com
