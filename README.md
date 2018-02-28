@@ -18,3 +18,5 @@ packed into distribution format.
 
 https://glacial-reef-59256.herokuapp.com
 
+Todo:
+    Add Angular test and CircleCI integration.
