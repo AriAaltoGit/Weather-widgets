@@ -3,12 +3,12 @@
     <!-- class.invisible keepsd DOM structure -->
     <div class="card-header" [class.invisible]="!dataReceived">
             <div class="row" >
-        <div class="col-sm-8" id="location-wrapper">
+        <div class="col-md-8" id="location-wrapper">
             <p>
                 <i id="location-icon" class="class fa fa-map-marker" aria-hidden="true"></i>{{ currentLocation }}</p>
                 <p id="timestamp">{{ currentTime }}</p>
         </div>
-        <div class="col-sm-4 text-right">
+        <div class="col-md-4 text-right">
             <h1 style="white-space: nowrap;">{{ weatherData.temp | tempUnit: currentTempUnit }}</h1>
         </div>
     </div>

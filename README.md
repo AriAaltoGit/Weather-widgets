@@ -14,9 +14,11 @@ The widget uses node server for distribution to Heroku and
 lite-server for development. This is configured from package.json. 
 
 The widget is set to production mode in main.ts for Heroku, but the code is not
-packed into distribution format. 
+packed into distribution format. The app may thus take a while to load. 
 
 https://glacial-reef-59256.herokuapp.com
 
 Todo:
     Add Angular test and CircleCI integration.
+    Optimizing code for distribution.
+    Better support to browser and screen sizes.

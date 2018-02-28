@@ -29,8 +29,8 @@ var WeatherComponent = /** @class */ (function () {
         this.currentTime = Date();
     }
     WeatherComponent.prototype.ngAfterViewInit = function () {
+        /* Set weather icons to each card element*/
         this.canvas.nativeElement.id = this.iconTarget;
-        console.log(this.canvas.nativeElement.id);
     };
     WeatherComponent.prototype.ngOnInit = function () {
         var _this = this;

@@ -4,7 +4,7 @@
     cursor: pointer;
     margin-top: 10px;
     margin-bottom: 10px;
-    min-height: 480px;
+    min-height: 510px;
 }
 .card,
 .card-header,
@@ -19,8 +19,9 @@
     padding: 1rem .5rem;
     background-color: transparent;
 }
-#locatio-wrapper {
+#location-wrapper {
     font-size: 1.1rem;
+    min-height: 120px;
 }
 #location-icon{
     padding-right: .5rem;
