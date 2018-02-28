@@ -17,6 +17,9 @@ var Rx_1 = require("rxjs/Rx");
 var WeatherComponent = /** @class */ (function () {
     function WeatherComponent(service) {
         this.service = service;
+        //pos: Position;
+        this.posLat = 0;
+        this.posLong = 0;
         this.weatherData = new weather_1.Weather(null, null, null, null, null); //Initialize before data
         this.currentSpeedUnit = "m/s";
         this.currentTempUnit = "celsius";
@@ -26,26 +29,39 @@ var WeatherComponent = /** @class */ (function () {
         this.currentTime = Date();
     }
     WeatherComponent.prototype.ngOnInit = function () {
-        // this.getCurrentLocation();
         var _this = this;
-        /* Disable timer to test in ie browser. */
-        var timer = Rx_1.Observable.timer(2000, 60000);
-        timer.subscribe(function (t) {
-            _this.getCurrentLocation();
-        });
+        if (this.target_long && this.target_long) {
+            this.getCurrentWeatherFromInputCoords();
+        }
+        else {
+            /* For single fetch. */
+            // this.getCurrentLocation();
+            /* Disable timer to test in ie browser. */
+            var timer = Rx_1.Observable.timer(2000, 60000);
+            timer.subscribe(function (t) {
+                _this.getCurrentLocation();
+            });
+        }
     };
     WeatherComponent.prototype.getCurrentLocation = function () {
         var _this = this;
         this.service.getCurrentLocation()
             .subscribe(function (position) {
-            _this.pos = position;
+            _this.posLat = position.coords.latitude;
+            _this.posLong = position.coords.longitude;
             _this.getCurrentWeather();
             _this.getLocationName();
         }, function (err) { return console.error(err); });
     };
+    WeatherComponent.prototype.getCurrentWeatherFromInputCoords = function () {
+        this.posLat = this.target_lat;
+        this.posLong = this.target_long;
+        this.getCurrentWeather();
+        this.getLocationName();
+    };
     WeatherComponent.prototype.getCurrentWeather = function () {
         var _this = this;
-        this.service.getCurrentWeather(this.pos.coords.latitude, this.pos.coords.longitude)
+        this.service.getCurrentWeather(this.posLat, this.posLong)
             .subscribe(function (weather) {
             _this.weatherData.temp = weather["currently"]["temperature"],
                 _this.weatherData.summary = weather["currently"]["summary"],
@@ -61,7 +77,7 @@ var WeatherComponent = /** @class */ (function () {
     };
     WeatherComponent.prototype.getLocationName = function () {
         var _this = this;
-        this.service.getLocationName(this.pos.coords.latitude, this.pos.coords.longitude)
+        this.service.getLocationName(this.posLat, this.posLong)
             .subscribe(function (location) {
             //console.log(location); //Test location data
             _this.currentLocation = location["results"][1]["formatted_address"];
@@ -92,6 +108,7 @@ var WeatherComponent = /** @class */ (function () {
     WeatherComponent.prototype.setIcon = function () {
         this.icons.add("icon", this.weatherData.icon);
         this.icons.play();
+        console.log("icons: ", this.icons);
     };
     ;
     WeatherComponent.prototype.setStyles = function () {
@@ -105,6 +122,14 @@ var WeatherComponent = /** @class */ (function () {
             return constants_1.WEATHER_COLORS["default"];
         }
     };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Number)
+    ], WeatherComponent.prototype, "target_lat", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Number)
+    ], WeatherComponent.prototype, "target_long", void 0);
     WeatherComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

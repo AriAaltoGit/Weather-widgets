@@ -12,9 +12,9 @@ var AppComponent = /** @class */ (function () {
     }
     AppComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: "\n        <div class=\"container\">\n            <div class=\"col-sm-6 widget-column\">\n                <weather-widget></weather-widget>\n            </div>\n        </div>\n    ",
-            styles: ["\n    \n    \n    "]
+            selector: 'weather-app',
+            template: "\n        <div class=\"container\">\n            <div class=\"row\">\n            <div class=\"col-sm-4 widget-column\">\n                <weather-widget></weather-widget>\n            </div>\n            <div class=\"col-sm-4 widget-column\">\n                <weather-widget target_lat=35.6584421 target_long=139.7328635></weather-widget>\n            </div>\n            <div class=\"col-sm-4 widget-column\">\n                <weather-widget target_lat=40.7406905 target_long=-73.9938438></weather-widget>\n            </div>\n            </div>\n            <div class=\"row\">\n            <div class=\"col-sm-4 widget-column\">\n                <weather-widget target_lat=52.3650691 target_long=4.9040238></weather-widget>\n            </div>\n            <div class=\"col-sm-4 widget-column\">\n            <weather-widget target_lat=25.092535 target_long=55.1562243></weather-widget>\n            </div>\n            </div>\n        </div>\n    ",
+            styles: [""]
         })
     ], AppComponent);
     return AppComponent;

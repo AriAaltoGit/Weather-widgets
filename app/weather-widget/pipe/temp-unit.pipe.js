@@ -12,7 +12,7 @@ var TempUnitPipe = /** @class */ (function () {
     }
     TempUnitPipe.prototype.transform = function (temp, unitType) {
         if (unitType == 'celsius') {
-            var celsius = Number((temp * (-1) - 32) * 5 / 9).toFixed(0);
+            var celsius = Number((temp * (1) - 32) * 5 / 9).toFixed(0);
             return celsius + " \u00B0C";
         }
         else {
